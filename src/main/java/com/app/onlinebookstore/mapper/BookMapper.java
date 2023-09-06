@@ -11,6 +11,6 @@ import org.mapstruct.Mapping;
 public interface BookMapper {
     BookDto toDto(Book book);
 
-    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "id",ignore = true)
     Book toModel(CreateBookRequestDto requestDto);
 }
