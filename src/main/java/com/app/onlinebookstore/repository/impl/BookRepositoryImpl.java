@@ -4,21 +4,17 @@ import com.app.onlinebookstore.model.Book;
 import com.app.onlinebookstore.repository.BookRepository;
 import java.util.List;
 import java.util.Optional;
+import lombok.Data;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+@Data
 @Repository
 public class BookRepositoryImpl implements BookRepository {
     private final SessionFactory sessionFactory;
-
-    @Autowired
-    public BookRepositoryImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     @Override
     public Book save(Book book) {
@@ -45,7 +41,7 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public List<Book> findAll() {
         try (Session session = sessionFactory.openSession()) {
-            Query<Book> getAllBooksQuery = session.createQuery("from Book ", Book.class);
+            Query<Book> getAllBooksQuery = session.createQuery("FROM Book ", Book.class);
             return getAllBooksQuery.getResultList();
         }
     }
