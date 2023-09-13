@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-user-and-admin
+      author: osa
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: email
+                  value: user@example.com
+              - column:
+                  name: password
+                  value: $2a$12$aIDt7oZ2DqzKnVXEZGK1ceB6ZIlFZRWou8/TO8bidG3wg1e0skG6K
+              - column:
+                  name: first_name
+                  value: John
+              - column:
+                  name: last_name
+                  value: Doe
+              - column:
+                  name: shipping_address
+                  value: null
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 2
+              - column:
+                  name: email
+                  value: admin@example.com
+              - column:
+                  name: password
+                  value: $2a$12$aIDt7oZ2DqzKnVXEZGK1ceB6ZIlFZRWou8/TO8bidG3wg1e0skG6K
+              - column:
+                  name: first_name
+                  value: Bob
+              - column:
+                  name: last_name
+                  value: Olen
+              - column:
+                  name: shipping_address
+                  value: 13 st Lincoln ave.
