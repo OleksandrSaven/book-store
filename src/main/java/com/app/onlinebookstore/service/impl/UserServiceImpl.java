@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         Set<Role> roles = new HashSet<>();
         Role defoultRole = roleRepository.findByRoleName(
                 RoleName.ROLE_USER).orElseThrow(() ->
-                new NoSuchElementException("Can't find such role"));
+                new NoSuchElementException("Can't find such role: " + RoleName.ROLE_USER));
         roles.add(defoultRole);
         user.setRoles(roles);
         User saveUser = userRepository.save(user);
