@@ -30,7 +30,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto request)
-    throws RegistrationException {
+            throws RegistrationException {
         return authenticationService.authenticate(request);
     }
 }
