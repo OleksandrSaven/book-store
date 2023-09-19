@@ -1,6 +1,5 @@
 package com.app.onlinebookstore.service;
 
-import com.app.onlinebookstore.dto.BookDtoWithoutCategoryIds;
 import com.app.onlinebookstore.dto.CategoryDto;
 import com.app.onlinebookstore.dto.CreateCategoryRequestDto;
 import java.util.List;
@@ -16,6 +15,4 @@ public interface CategoryService {
     CategoryDto update(Long id, CreateCategoryRequestDto category);
 
     void deleteById(Long id);
-
-    List<BookDtoWithoutCategoryIds> getBooksByCategoriesId(Long id);
 }
