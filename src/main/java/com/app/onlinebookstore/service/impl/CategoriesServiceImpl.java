@@ -1,6 +1,5 @@
 package com.app.onlinebookstore.service.impl;
 
-import com.app.onlinebookstore.dto.BookDtoWithoutCategoryIds;
 import com.app.onlinebookstore.dto.CategoryDto;
 import com.app.onlinebookstore.dto.CreateCategoryRequestDto;
 import com.app.onlinebookstore.exaption.EntityNotFoundException;
@@ -49,10 +48,5 @@ public class CategoriesServiceImpl implements CategoryService {
     @Override
     public void deleteById(Long id) {
         categoryRepository.deleteById(id);
-    }
-
-    @Override
-    public List<BookDtoWithoutCategoryIds> getBooksByCategoriesId(Long id) {
-        return null;
     }
 }
