@@ -9,9 +9,9 @@ import com.app.onlinebookstore.model.User;
 import com.app.onlinebookstore.repository.ShoppingCartRepository;
 import com.app.onlinebookstore.service.CartItemService;
 import com.app.onlinebookstore.service.ShoppingCartService;
-import com.app.onlinebookstore.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final CartItemService cartItemService;
     private final ShoppingCartRepository shoppingCartRepository;
-    private final UserService userService;
 
     @Override
     public CartItemDto save(CreateCartItemRequestDto requestDto) {
@@ -29,15 +28,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     @Transactional
-    public ShoppingCartDto getShoppingCart(Pageable pageable) {
-        User authenticatedUser = userService.getAuthenticatedUser();
+    public ShoppingCartDto getShoppingCart(Authentication authentication, Pageable pageable) {
+        User currentUser = (User) authentication.getPrincipal();
         ShoppingCart shoppingCart = shoppingCartRepository
-                .findByUserId(authenticatedUser.getId()).orElseThrow(
+                .findByUserId(currentUser.getId()).orElseThrow(
                         () -> new EntityNotFoundException("Can't find shopping cart by user id "
-                        + authenticatedUser.getId()));
+                        + currentUser.getId()));
         ShoppingCartDto shoppingCartDto = new ShoppingCartDto();
         shoppingCartDto.setId(shoppingCart.getId());
-        shoppingCartDto.setUserId(authenticatedUser.getId());
+        shoppingCartDto.setUserId(currentUser.getId());
         shoppingCartDto.setCartItems(cartItemService
                 .findCartItemsByShoppingCarts(shoppingCart.getId()));
         return shoppingCartDto;

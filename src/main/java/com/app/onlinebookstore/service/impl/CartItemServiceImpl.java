@@ -36,8 +36,8 @@ public class CartItemServiceImpl implements CartItemService {
         cartItem.setBook(bookRepository.findById(requestDto.getBookId()).get());
         cartItem.setQuantity(requestDto.getQuantity());
         Long userId = userService.getAuthenticatedUser().getId();
-        Long shoppingCartId = shoppingCartRepository.findByUserId(userId).orElseThrow().getId();
-        setShoppingCartAndCartItems(shoppingCartId, cartItem);
+        setShoppingCartAndCartItems(shoppingCartRepository
+                .findByUserId(userId).get().getId(), cartItem);
         return cartItemMapper.toDto(cartItemRepository.save(cartItem));
     }
 

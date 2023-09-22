@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Shopping cart management", description = "Endpoints for managing shopping cart")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/api/cart")
+@RequestMapping(value = "/cart")
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
     private final CartItemService cartItemService;
@@ -38,8 +39,8 @@ public class ShoppingCartController {
     @Operation(summary = "Get shopping cart",
             description = "Get shopping cart")
     @GetMapping
-    public ShoppingCartDto getShoppingCart(Pageable pageable) {
-        return shoppingCartService.getShoppingCart(pageable);
+    public ShoppingCartDto getShoppingCart(Authentication authentication, Pageable pageable) {
+        return shoppingCartService.getShoppingCart(authentication, pageable);
     }
 
     @Operation(summary = "Update info about existing cart-item",
