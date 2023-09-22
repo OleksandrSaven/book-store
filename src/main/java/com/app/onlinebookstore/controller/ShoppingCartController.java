@@ -32,7 +32,8 @@ public class ShoppingCartController {
     @Operation(summary = "Create new shopping cart",
             description = "Return created shopping cart")
     @PostMapping
-    public CartItemDto createShoppingCart(@RequestBody @Valid CreateCartItemRequestDto requestDto) {
+    public CartItemDto createShoppingCart(@RequestBody
+                                              @Valid CreateCartItemRequestDto requestDto) {
         return shoppingCartService.save(requestDto);
     }
 

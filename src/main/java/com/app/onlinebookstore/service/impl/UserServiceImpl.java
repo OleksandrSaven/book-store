@@ -16,9 +16,6 @@ import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -57,12 +54,5 @@ public class UserServiceImpl implements UserService {
         shoppingCartRepository.save(shoppingCart);
         User saveUser = userRepository.save(user);
         return userMapper.toUserResponse(saveUser);
-    }
-
-    @Override
-    public User getAuthenticatedUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return userRepository.findByEmail(authentication.getName()).orElseThrow(
-                () -> new UsernameNotFoundException("Can't find user by email"));
     }
 }
