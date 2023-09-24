@@ -18,11 +18,15 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     nullable: false
+                    references: cart_items(id)
+                    foreignKeyName: fk_cart_items_shipping_cart_id
               - column:
                   name: book_id
                   type: bigint
                   constraints:
                     nullable: false
+                    references: books(id)
+                    foreignKeyName: fk_cart_items_book_id
               - column:
                   name: quantity
                   type: int
