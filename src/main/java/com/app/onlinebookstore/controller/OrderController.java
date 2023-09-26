@@ -31,6 +31,7 @@ public class OrderController {
 
     @Operation(summary = "Create new order",
             description = "Return created order")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public OrderDto createOrder(@RequestBody @Valid CreateOrderRequestDto requestDto,
                                 Authentication authentication) {
@@ -38,6 +39,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Get all orders", description = "Get a list of all available orders")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping
     public List<OrderDto> findAllOrder(Pageable pageable) {
         return orderService.findAllOrders(pageable);
@@ -45,12 +47,14 @@ public class OrderController {
 
     @Operation(summary = "Get all items from order",
             description = "Get a list of all items from order")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value = "/{orderId}/items")
     public Set<OrderItemDto> findAllItems(@PathVariable Long orderId) {
         return orderService.findAllOrderItems(orderId);
     }
 
     @Operation(summary = "Get an order by item", description = "Get an order item from order")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value = "/{orderId}/items/{itemId}")
     public OrderItemDto findOrderItemById(@PathVariable Long orderId, @PathVariable Long itemId) {
         return orderService.findOrderItemById(orderId, itemId);
