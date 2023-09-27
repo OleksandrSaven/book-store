@@ -68,15 +68,10 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public void delete(Long id) {
         Long userId = userService.getAuthenticatedUser().getId();
-        Optional<ShoppingCart> byUserId = shoppingCartRepository.findByUserId(userId);
-        List<CartItem> cartItemsByShoppingCartId = cartItemRepository
-                .findCartItemsByShoppingCartId(byUserId.get().getId());
-        boolean exist = cartItemsByShoppingCartId.stream()
-                .map(CartItem::getId)
-                .anyMatch(i -> i.equals(id));
-        if (exist) {
-            cartItemRepository.deleteById(id);
-        }
+        CartItem cartItem = cartItemRepository
+                .findCartItemsByCartIdAndUserId(id, userId);
+        cartItemRepository.delete(cartItem);
+
     }
 
     private void setShoppingCartAndCartItems(Long shoppingCartId, CartItem cartItem) {

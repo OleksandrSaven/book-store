@@ -7,10 +7,9 @@ import com.app.onlinebookstore.dto.OrderStatusDto;
 import java.util.List;
 import java.util.Set;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
 
 public interface OrderService {
-    OrderDto createOrder(CreateOrderRequestDto requestDto, Authentication authentication);
+    OrderDto createOrder(CreateOrderRequestDto requestDto, Long id);
 
     List<OrderDto> findAllOrders(Pageable pageable);
 
