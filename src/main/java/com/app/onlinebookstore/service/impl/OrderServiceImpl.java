@@ -15,8 +15,8 @@ import com.app.onlinebookstore.model.Status;
 import com.app.onlinebookstore.repository.CartItemRepository;
 import com.app.onlinebookstore.repository.OrderItemRepository;
 import com.app.onlinebookstore.repository.OrderRepository;
-import com.app.onlinebookstore.repository.ShoppingCartRepository;
 import com.app.onlinebookstore.service.OrderService;
+import com.app.onlinebookstore.service.ShoppingCartService;
 import com.app.onlinebookstore.service.UserService;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final CartItemRepository cartItemRepository;
-    private final ShoppingCartRepository shoppingCartRepository;
+    private final ShoppingCartService shoppingCartService;
     private final OrderItemMapper orderItemMapper;
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
@@ -41,10 +41,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto createOrder(CreateOrderRequestDto requestDto, Long userId) {
-        ShoppingCart shoppingCart = shoppingCartRepository
-                 .findByUserId(userId).orElseThrow(
-                        () -> new EntityNotFoundException("Can't find shopping cart by user id "
-                                + userId));
+        ShoppingCart shoppingCart = shoppingCartService.getShoppingCart(userId);
         Order order = addOrder(shoppingCart, requestDto);
         return setOrderItems(orderRepository.save(order));
     }
