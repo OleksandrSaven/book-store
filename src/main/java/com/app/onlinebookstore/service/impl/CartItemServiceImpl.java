@@ -14,7 +14,6 @@ import com.app.onlinebookstore.service.CartItemService;
 import com.app.onlinebookstore.service.UserService;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
