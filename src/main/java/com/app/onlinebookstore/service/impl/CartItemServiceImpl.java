@@ -7,11 +7,9 @@ import com.app.onlinebookstore.exaption.EntityNotFoundException;
 import com.app.onlinebookstore.mapper.CartItemMapper;
 import com.app.onlinebookstore.model.CartItem;
 import com.app.onlinebookstore.model.ShoppingCart;
-import com.app.onlinebookstore.model.User;
 import com.app.onlinebookstore.repository.BookRepository;
 import com.app.onlinebookstore.repository.CartItemRepository;
 import com.app.onlinebookstore.repository.ShoppingCartRepository;
-import com.app.onlinebookstore.repository.UserRepository;
 import com.app.onlinebookstore.service.CartItemService;
 import com.app.onlinebookstore.service.UserService;
 import java.util.HashSet;
@@ -20,8 +18,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,17 +29,16 @@ public class CartItemServiceImpl implements CartItemService {
     private final ShoppingCartRepository shoppingCartRepository;
     private final CartItemMapper cartItemMapper;
     private final CartItemRepository cartItemRepository;
-    private final UserRepository userRepository;
 
     @Override
     @Transactional
     public CartItemDto save(CreateCartItemRequestDto requestDto) {
         CartItem cartItem = new CartItem();
-        cartItem.setBook(bookRepository.findById(requestDto.getBookId()).get());
+        cartItem.setBook(bookRepository.findById(requestDto.getBookId()).orElseThrow(
+                () -> new EntityNotFoundException("Can't find book by id "
+                        + requestDto.getBookId())));
         cartItem.setQuantity(requestDto.getQuantity());
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Optional<User> user = userRepository.findByEmail(authentication.getName());
-        Long userId = user.get().getId();
+        Long userId = userService.getAuthenticatedUser().getId();
         setShoppingCartAndCartItems(shoppingCartRepository
                 .findByUserId(userId).get().getId(), cartItem);
         return cartItemMapper.toDto(cartItemRepository.save(cartItem));
@@ -71,7 +66,6 @@ public class CartItemServiceImpl implements CartItemService {
         CartItem cartItem = cartItemRepository
                 .findCartItemsByCartIdAndUserId(id, userId);
         cartItemRepository.delete(cartItem);
-
     }
 
     private void setShoppingCartAndCartItems(Long shoppingCartId, CartItem cartItem) {
