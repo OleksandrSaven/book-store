@@ -10,6 +10,7 @@ handle user orders. The application includes the following features:
 - Containerization.
 
 ## Technologies and Tools Used
+![](media/tech.png)
 
 This project is built using a variety of technologies and tools to ensure a robust and efficient online book store. Here's an overview of the key components:
 
@@ -34,14 +35,17 @@ To start this project, you'll need to follow these general steps. Keep in mind t
 
 - **Prerequisites**:
 
-Ensure you have Java Development Kit (JDK) installed on your system.
+Ensure you have Java Development Kit v17 or latest (JDK) installed on your system.
 Make sure you have Docker installed if you plan to run the application in a container.
 - **Clone the Repository**:
 
 Clone the project's repository from a version control system like Git.
 - **Database Configuration**:
+  - ***Local database:*** Check the project's configuration files (usually in the src/main/resources directory) to configure your database connection settings. Ensure you have a MySQL database set up and that you provide the correct credentials.
+  - ***Using Docker:*** If you haven't already installed Docker, you can download and install it from the official Docker website: https://docs.docker.com/get-docker/. In the root directory you can find docker-compose.yml file and run it. This setup will allow you to run this application along with a MySQL database using Docker without the need to manually install and configure MySQL:
 
-Check the project's configuration files (usually in the src/main/resources directory) to configure your database connection settings. Ensure you have a MySQL database set up and that you provide the correct credentials.
+  <pre>docker-compose up </pre> 
+
 - **Build the Project**:
 
 Open a terminal/command prompt in the project's root directory and run the following command to build the project using Maven:
@@ -63,6 +67,7 @@ API Documentation (Swagger):
 
 Swagger is integrated into the project, you can access the interactive API documentation by navigating to the Swagger UI URL. It usually looks something like: http://localhost:8080/api/swagger-ui/index.html.
 ## API  Testing with Postman
+![](media/postman.png)
 
 We have provided a Postman collection that you can use to test the API endpoints easily.
 This collection helps you set up contract tests to ensure that two separate systems are compatible and can communicate with one another.
