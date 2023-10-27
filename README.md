@@ -66,6 +66,33 @@ Once the application is up and running, you can access it by opening a web brows
 API Documentation (Swagger):
 
 Swagger is integrated into the project, you can access the interactive API documentation by navigating to the Swagger UI URL. It usually looks something like: http://localhost:8080/api/swagger-ui/index.html.
+#### This application has a number of controllers that have the appropriate functionality:
+ 1. Authentication Controller:
+    - register new user
+    - login as user or admin
+ 2. Book Controller
+    - find all books
+    - get book by id
+    - create book
+    - delete book
+    - update book
+3. Category Controller
+   - create category
+   - get all category
+   - update category
+   - delete category
+   - get books by category
+4. Order Controller
+   - create order
+   - find all orders
+   - find all items in specific order
+   - find specific item in specific order
+   - update order
+5. Shopping Cart Controller
+   - create cart
+   - get cart
+   - update cart 
+   - delete cart
 ## API  Testing with Postman
 ![](media/postman.png)
 
@@ -96,5 +123,26 @@ Follow these steps to get started:
     - The collection includes a variety of requests to different endpoints. Feel free to explore and test them to understand the API's capabilities.
 
 6. **Note**: Some requests may require authentication. Ensure you are logged in and have the necessary permissions.
+
+## Contribution
+if you have a desire to participate in the improvement of the application, you can perform the following steps:
+1. Fork the [GitHub repository](https://github.com/OleksandrSaven/book-store) to your own account.
+
+2. Create a new branch for your feature or bug fix.
+
+3. Make your changes in your branch.
+
+4. Test your changes thoroughly to ensure they do not introduce new issues.
+
+5. Submit a pull request to the [main repository](https://github.com/OleksandrSaven/book-store) following the template provided.
+
+6. Your pull request will be reviewed and any necessary changes will be requested.
+
+7. Once your pull request is approved, it will be merged into the project.
+
+
+   Thank you for your interest in contributing to online-book-store! We appreciate your help in making the project better for everyone.
+Feel free to customize this app to your project's specific needs and provide all the necessary information to make it easy for others to get involved.
+
 ## Additional
 You can watch a video demonstration of how the application works by following the link: [link](https://www.loom.com/share/b22e5acdcf8d40f694ae9ba4246d4af7)
