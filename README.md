@@ -96,7 +96,7 @@ Swagger is integrated into the project, you can access the interactive API docum
 ## API  Testing with Postman
 ![](media/postman.png)
 
-We have provided a Postman collection that you can use to test the API endpoints easily.
+I have provided a Postman collection that you can use to test the API endpoints easily.
 This collection helps you set up contract tests to ensure that two separate systems are compatible and can communicate with one another.
 Follow these steps to get started:
 1. **Download Postman**: If you don't have Postman installed, you can [download it here](https://www.postman.com/downloads/).
