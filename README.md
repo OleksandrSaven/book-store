@@ -141,7 +141,7 @@ if you have a desire to participate in the improvement of the application, you c
 7. Once your pull request is approved, it will be merged into the project.
 
 
-   Thank you for your interest in contributing to online-book-store! We appreciate your help in making the project better for everyone.
+   Thank you for your interest in contributing to online-book-store! I appreciate your help in making the project better for everyone.
 Feel free to customize this app to your project's specific needs and provide all the necessary information to make it easy for others to get involved.
 
 ## Additional
