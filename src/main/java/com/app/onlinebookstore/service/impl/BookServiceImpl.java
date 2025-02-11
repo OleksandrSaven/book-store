@@ -8,11 +8,13 @@ import com.app.onlinebookstore.mapper.BookMapper;
 import com.app.onlinebookstore.model.Book;
 import com.app.onlinebookstore.repository.BookRepository;
 import com.app.onlinebookstore.service.BookService;
+import com.app.onlinebookstore.specification.BookSpecification;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -56,5 +58,13 @@ public class BookServiceImpl implements BookService {
     public List<BookDtoWithoutCategoryIds> findAllCategoryId(Long id) {
         return bookRepository.findAllByCategoryId(id).stream()
                 .map(bookMapper::toDtoWithoutCategorise).collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<BookDto> searchBooks(String author, String title, List<String> categories,
+                                     Pageable pageable) {
+        var bookSpecification = new BookSpecification();
+        Specification<Book> specification = bookSpecification.searchBook(author, title, categories);
+        return bookRepository.findAll(specification, pageable).map(bookMapper::toDto);
     }
 }

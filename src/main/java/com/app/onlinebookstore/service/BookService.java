@@ -19,4 +19,7 @@ public interface BookService {
     BookDto update(Long id, CreateBookRequestDto book);
 
     List<BookDtoWithoutCategoryIds> findAllCategoryId(Long id);
+
+    Page<BookDto> searchBooks(String author, String title, List<String> categories,
+                              Pageable pageable);
 }
