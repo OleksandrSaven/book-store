@@ -23,6 +23,8 @@ public class BookSpecification {
                         criteriaBuilder.like(root.get("title"), "%" + title + "%"));
             }
 
+            query.distinct(true);
+
             if (categories != null && !categories.isEmpty()) {
                 Join<Book, Category> categoryJoin = root.join("categories", JoinType.INNER);
                 predicate = criteriaBuilder.and(predicate,
