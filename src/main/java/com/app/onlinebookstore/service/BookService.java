@@ -22,4 +22,6 @@ public interface BookService {
 
     Page<BookDto> searchBooks(String author, String title, List<String> categories,
                               Pageable pageable);
+
+    List<BookDto> findAllById(List<Long> ids);
 }

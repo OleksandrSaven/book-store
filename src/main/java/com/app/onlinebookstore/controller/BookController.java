@@ -72,4 +72,9 @@ public class BookController {
                                      Pageable pageable) {
         return bookService.searchBooks(author, title, categories, pageable);
     }
+
+    @GetMapping("/filtered")
+    public List<BookDto> getBooksByIds(@RequestParam(required = true) List<Long> ids) {
+        return bookService.findAllById(ids);
+    }
 }
