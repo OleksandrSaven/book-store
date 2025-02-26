@@ -1,6 +1,7 @@
 package com.app.onlinebookstore.config;
 
 import com.app.onlinebookstore.security.JwtAuthenticationFilter;
+import com.app.onlinebookstore.security.Oauth2AuthenticationHandler;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +28,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final Oauth2AuthenticationHandler oauth2AuthenticationHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -62,6 +64,10 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                .oauth2Login(oauth ->
+                        oauth.successHandler(oauth2AuthenticationHandler))
+
                 .addFilterBefore(jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(userDetailsService)
