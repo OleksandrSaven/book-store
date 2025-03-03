@@ -26,12 +26,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @RequiredArgsConstructor
 public class Oauth2AuthenticationHandler extends SimpleUrlAuthenticationSuccessHandler {
+    private static final String URI_TOKEN = "http://localhost:4200/login?token=";
+    private static final String EMAIL = "email";
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     private final ShoppingCartRepository shoppingCartRepository;
-    private static final String URI_TOKEN = "http://localhost:4200/login?token=";
-    private static final String EMAIL = "email";
     private final JwtUtil jwtUtil;
 
     @Override
@@ -51,7 +51,7 @@ public class Oauth2AuthenticationHandler extends SimpleUrlAuthenticationSuccessH
             gitHubUser.setLastName(oauth2User.getAttribute("name"));
             gitHubUser.setPassword(passwordEncoder.encode("password"));
 
-            Set<Role> roles= new HashSet<>();
+            Set<Role> roles = new HashSet<>();
             Role defoultRole = roleRepository.findByRoleName(RoleName.ROLE_USER).orElseThrow(
                     () -> new EntityNotFoundException("Current role does not exist."));
             roles.add(defoultRole);
